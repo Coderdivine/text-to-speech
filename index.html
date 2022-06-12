@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <p>Hey boi</p>  
+</body>
+</html>
+<script>
+ const syn = window.speechSynthesis;
+ const text = `
+             hello Youtube today was extensive
+             but stil open a chart to better upgrade your performance.
+             check my tutorials...,
+           `
+
+const speak=()=>{
+    if(syn.speaking){
+              console.error("Already speaking")
+              return
+            }
+            if(text!==''){
+              const speakText = new SpeechSynthesisUtterance(text);
+              speakText.onend = e=>{
+                console.log("done speaking..."+JSON.stringify(e))
+              }
+              speakText.onerror=e=>{
+                console.log(e)
+              }
+              
+              speakText.rate =1
+              speakText.pitch = 0.5
+              syn.speak(speakText)
+            }
+       if(syn.onvoiceschanged!==undefined){
+      syn.onvoiceschanged= showVoice()
+    };
+}
+    const showVoice=async()=>{
+    const voices = syn.getVoices()
+     voices && voices.forEach((voice)=>{
+       console.log(voice)
+     });
+     speak()
+
+   }
+   showVoice()
+</script>
